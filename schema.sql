@@ -113,6 +113,7 @@ CREATE TABLE container (
 
 	FOREIGN KEY (mmsi)
 		REFERENCES ship (mmsi)
+		ON DELETE CASCADE
 		DEFERRABLE INITIALLY IMMEDIATE,
 
 	FOREIGN KEY (bay, row, tier, code)
@@ -156,7 +157,9 @@ CREATE TABLE container (
 			AND (
 				(tier = 1 AND support_tier IS NULL)
 				OR
-				(tier > 1 AND support_tier = tier - 1)
+				(tier > 1 
+				 AND support_tier = tier - 1 
+				 AND support_tier IS NOT NULL)
 			)
 		)
 	),

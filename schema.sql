@@ -75,6 +75,7 @@ CREATE TABLE ship (
 		DEFERRABLE INITIALLY IMMEDIATE
 );
 
+-- Unable to enforce that container must be in either ship or yard.
 CREATE TABLE container (
 	iso_6346 VARCHAR(15) PRIMARY KEY, 
 	content VARCHAR(50) NOT NULL,

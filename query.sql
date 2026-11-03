@@ -2,29 +2,28 @@
 INSERT INTO category (category_type, max_tier)
 VALUES ('Simple', 3);
 
-INSERT INTO yard (code, category_type, max_tier)
-VALUES ('Y', 'Simple', 3);
+INSERT INTO yard (code, category_type)
+VALUES ('Y', 'Simple');
 
 INSERT INTO position (
-	bay,
-	row,
-	tier,
-	code,
-	max_tier
+    bay,
+    row,
+    tier,
+    code
 )
-VALUES 
-	(0, 0, 1, 'Y', 3),
-	(0, 1, 1, 'Y', 3),
-	(1, 0, 1, 'Y', 3),
-	(1, 1, 1, 'Y', 3),
-	(0, 0, 2, 'Y', 3),
-	(0, 1, 2, 'Y', 3),
-	(1, 0, 2, 'Y', 3),
-	(1, 1, 2, 'Y', 3),
-	(0, 0, 3, 'Y', 3),
-	(0, 1, 3, 'Y', 3),
-	(1, 0, 3, 'Y', 3),
-	(1, 1, 3, 'Y', 3);
+VALUES
+    (0, 0, 1, 'Y'),
+    (0, 1, 1, 'Y'),
+    (1, 0, 1, 'Y'),
+    (1, 1, 1, 'Y'),
+    (0, 0, 2, 'Y'),
+    (0, 1, 2, 'Y'),
+    (1, 0, 2, 'Y'),
+    (1, 1, 2, 'Y'),
+    (0, 0, 3, 'Y'),
+    (0, 1, 3, 'Y'),
+    (1, 0, 3, 'Y'),
+    (1, 1, 3, 'Y');
 
 -- operation 2
 INSERT INTO berth (longitude, latitude, code)

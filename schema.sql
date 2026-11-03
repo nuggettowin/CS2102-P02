@@ -13,7 +13,7 @@ CREATE TABLE position(
 	row INTEGER CHECK (row >= 0),
 
 	-- Tier should be limited to the max_tier of category,
-	-- but .this cannot be enforced without creating a foreign key to a non-minimal primary key
+	-- but this cannot be enforced without creating a foreign key to a non-minimal primary key
 	-- since category_type is the minimal primary key of category.
 	tier INTEGER CHECK (tier >= 1),
 	code VARCHAR(50) REFERENCES yard(code),

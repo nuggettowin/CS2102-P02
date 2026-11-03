@@ -48,8 +48,8 @@ CREATE TABLE company (
 );
 
 CREATE TABLE berth (
-	longitude NUMERIC(8, 5) CHECK (longitude >= -180 AND longitude <=180),
-	latitude NUMERIC(8, 5) CHECK (latitude >= -90 AND latitude <=90),
+	longitude NUMERIC(8, 5) NOT NULL CHECK (longitude >= -180 AND longitude <=180),
+	latitude NUMERIC(8, 5) NOT NULL CHECK (latitude >= -90 AND latitude <=90),
 	
 	-- The specification describes berth codes as natural numbers,
 	-- but the required operations explicitly use codes 'B1' and 'B2'.

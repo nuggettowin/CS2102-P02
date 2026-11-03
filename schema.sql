@@ -75,36 +75,48 @@ CREATE TABLE ship (
 		DEFERRABLE INITIALLY IMMEDIATE
 );
 
-
 CREATE TABLE container (
 	iso_6346 VARCHAR(15) PRIMARY KEY, 
 	content VARCHAR(50) NOT NULL,
 	
-	company_code VARCHAR(50) NOT NULL,
+	company_code VARCHAR(50) NOT NULL,	
 
-	mmsi VARCHAR(9) NOT NULL,
+	FOREIGN KEY (company_code)
+		REFERENCES company (company_code)
+		DEFERRABLE INITIALLY IMMEDIATE,
+
+	-- Ownership is indicated by the first three letters of the
+	-- container's ISO identification.
+	CHECK (SUBSTRING(iso_6346 FROM 1 FOR 3) = company_code)
+);
+
+CREATE TABLE stored_at (
+	iso_6346 VARCHAR(15) PRIMARY KEY,
+	FOREIGN KEY (iso_6346) REFERENCES container(iso_6346), 
 	
 	bay INTEGER NOT NULL,
 	row INTEGER NOT NULL,
 	tier INTEGER NOT NULL,
 	code VARCHAR(50) NOT NULL,
 
-	FOREIGN KEY (company_code)
-		REFERENCES company (company_code)
-		DEFERRABLE INITIALLY IMMEDIATE,
-
-	FOREIGN KEY (mmsi)
-		REFERENCES ship (mmsi)
-		ON DELETE CASCADE
-		DEFERRABLE INITIALLY IMMEDIATE,
-
 	FOREIGN KEY (bay, row, tier, code)
 		REFERENCES position (bay, row, tier, code)
 		DEFERRABLE INITIALLY IMMEDIATE,
+
+	CONSTRAINT yard_pos UNIQUE (bay, row, tier, code)
 	
-	-- Ownership is indicated by the first three letters of the
-	-- container's ISO identification.
-	CHECK (SUBSTRING(iso_6346 FROM 1 FOR 3) = company_code)
+);
+
+CREATE TABLE loaded_on (
+	iso_6346 VARCHAR(15) PRIMARY KEY,
+	FOREIGN KEY (iso_6346) REFERENCES container(iso_6346), 
+	
+	mmsi VARCHAR(9) NOT NULL,
+	
+	FOREIGN KEY (mmsi)
+		REFERENCES ship (mmsi)
+		ON DELETE CASCADE
+		DEFERRABLE INITIALLY IMMEDIATE
 );
 
 
